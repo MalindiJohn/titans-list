@@ -1,25 +1,12 @@
-import { GetServerSideProps } from 'next';
+// export default async function Product({params}: {params: {id: string}}){
 
-interface ProductProps {
-    params: {
-        id: string;
-    };
-}
+//     const { id } =  await params;
 
-export default function Product({ params }: ProductProps) {
-    const { id } = params;
+//     return <h1>Product: {id}</h1>
+// }
+
+export default async function Product({ params }: { params: { id: string } }) {
+    const { id } = params; // No need for `await` here
 
     return <h1>Product: {id}</h1>;
 }
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    const { id } = context.params as { id: string };
-
-    return {
-        props: {
-            params: {
-                id,
-            },
-        },
-    };
-};
