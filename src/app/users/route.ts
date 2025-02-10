@@ -1,15 +1,16 @@
 const users = [
-    {id: 1, name: "Malindi John"},
-    {id: 2, name: "Mary Mutuku"}
+    { id: 1, name: "Malindi John" },
+    { id: 2, name: "Mary Mutuku" }
 ];
 
-async function GET(){
-
-    return Response.json(users);
+export async function GET() {
+    return new Response(JSON.stringify(users), { 
+        headers: { "Content-Type": "application/json" }, 
+        status: 200 
+    });
 }
 
-async function POST(request: Request){
-
+export async function POST(request: Request) {
     const user = await request.json();
 
     const newUser = {
@@ -20,12 +21,7 @@ async function POST(request: Request){
     users.push(newUser);
 
     return new Response(JSON.stringify(newUser), {
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         status: 201
-    })
-
+    });
 }
-
-export  { GET, POST, users };
