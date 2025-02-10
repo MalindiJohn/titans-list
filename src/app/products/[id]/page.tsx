@@ -1,3 +1,5 @@
+import { use } from "react";
+ 
 // export default async function Product({params}: {params: {id: string}}){
 
 //     const { id } =  await params;
@@ -5,8 +7,9 @@
 //     return <h1>Product: {id}</h1>
 // }
 
-export default async function Product({ params }: { params: { id: string } }) {
-    const { id } = params; // No need for `await` here
+export default function Product({params}: {params: Promise<{id: string}>}){
 
-    return <h1>Product: {id}</h1>;
+    const { id } =  use(params);
+
+    return <h1>Product: {id}</h1>
 }
