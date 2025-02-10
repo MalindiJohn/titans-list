@@ -1,6 +1,25 @@
-export default function Product({params}: {params: {id: string}}){
+import { GetServerSideProps } from 'next';
 
-    const { id } =  params;
-
-    return <h1>Product: {id}</h1>
+interface ProductProps {
+    params: {
+        id: string;
+    };
 }
+
+export default function Product({ params }: ProductProps) {
+    const { id } = params;
+
+    return <h1>Product: {id}</h1>;
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const { id } = context.params as { id: string };
+
+    return {
+        props: {
+            params: {
+                id,
+            },
+        },
+    };
+};
